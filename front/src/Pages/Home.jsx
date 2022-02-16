@@ -1,21 +1,31 @@
 import '../styles/Home.css';
 
-import { BrowserRouter as Router} from "react-router-dom";
+import Button from '@mui/material/ToggleButton';
+import ButtonGroup from '@mui/material/ToggleButtonGroup';
 
-import Button from '@mui/material/Button';
+import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
 
-function Home() {
+import Post from '../components/Home/post'
+import OnePost from '../components/Home/onepost'
+import AddPost from '../components/Home/addpost'
+
+function Auth() {
   return (
-  <Router>
     <div className="Home">
-      <header className="Home-header">
-        <h1>Logo</h1>
-        <Button value="Profil">Profil</Button>
+      <header className="Home-header"><img src='/icon_white.png' alt='logo groupomania'/>
+      <ButtonGroup exclusive>
+          <Button value="addpost" href='/user'>Profil</Button>
+        </ButtonGroup>
       </header>
-      <section></section>
+      <section>
+        <Routes>
+          <Route path="/Home" element={<Post />}/>
+          <Route path="/Home/post" element={<OnePost />}/>
+          <Route path="/Home/addpost" element={<AddPost />}/>
+        </Routes>
+      </section>
     </div>
-  </Router>
   );
 }
 
-export default Home;
+export default Auth;

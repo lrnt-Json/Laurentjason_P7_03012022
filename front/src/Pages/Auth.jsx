@@ -8,25 +8,24 @@ import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import Login from '../components/Auth/Login'
 import Register from '../components/Auth/Register'
 
-function Home() {
+
+function Auth() {
   return (
-  <Router>
     <div className="Home">
-      <header className="Home-header"><h1>Logo</h1>
-        <ButtonGroup color="primary" exclusive>
-          <Button value="Register" href='/register'>Register</Button>
-          <Button value="Login" href='/login'>Login</Button>
+      <header className="Home-header"><img src='/icon_white.png' alt='logo groupomania'/>
+      <ButtonGroup exclusive>
+          <Button value="Register" href='/auth/register'>Register</Button>
+          <Button value="Login" href='/auth/login'>Login</Button>
         </ButtonGroup>
       </header>
-      <section>                                       <Register/>
+      <section>
         <Routes>
-          <Route exact path="/login" component={Login}/>
-          <Route exact path="/register" component={Register}/>
+          <Route path="/login" element={<Login />}/>
+          <Route path="/register" element={<Register />}/>
         </Routes>
       </section>
     </div>
-  </Router>
   );
 }
 
-export default Home;
+export default Auth;

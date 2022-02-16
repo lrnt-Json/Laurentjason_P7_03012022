@@ -1,7 +1,13 @@
 const express = require('express')
 const app = express()
+const { Sequelize } = require('sequelize');
+const db = require("./models");
 
-//connexion
+const authRoutes = require('./routes/user')
+
+db.sequelize.sync()
+    .then(() => console.log("Db synchronized."))
+    .catch(() => console.log("Sequelize failed."))
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -9,5 +15,7 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     next();
 });
+
+app.use('/api/auth', authRoutes)
 
 module.exports = app;
