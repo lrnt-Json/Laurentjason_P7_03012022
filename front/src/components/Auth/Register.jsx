@@ -11,16 +11,19 @@ import IconButton from '@mui/material/IconButton';
 import Input from '@mui/material/Input';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
-
+import { useNavigate } from "react-router-dom";
 import * as React from 'react';
 
 const axios = require('axios').default;
 
 var validator = require('validator');
 
+var url =''
+
 function Main() {
     const [mail, setMail] = React.useState("");
     const [username, setUser] = React.useState("");
+    const navigate = useNavigate()
 
     const submit = () => {
         validator.isEmail(mail)
@@ -31,8 +34,10 @@ function Main() {
             data: {
               Mail: mail,
               Username: username,
-              password: values.password
+              password: values.password,
             }
+          }).then (function() {
+            navigate('/auth/login')
           })
     }
 

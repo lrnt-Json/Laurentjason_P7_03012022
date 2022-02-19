@@ -11,7 +11,7 @@ ReactDOM.render(
 <React.StrictMode>
 <Router>
 <Routes>
-    <Route path="*" element={<Navigate to="auth/" />} />
+    <Route path="*" element={<Navigate to="auth/login" />} />
     <Route path="auth/*" element={<Auth />}/>
     <Route path="home/*" element={<Home />}/>
     <Route path="user/*" element={<User />}/>

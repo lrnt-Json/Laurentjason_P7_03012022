@@ -21,6 +21,12 @@ img {
     justify-content: center;
 }
 
+.Home-Post {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .Home-Paper {
     display: flex;
     flex-direction: column;

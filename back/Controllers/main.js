@@ -1,13 +1,12 @@
 const db = require("../models");
-const axios = require('axios').default;
 const User = db.User;
 const Comment = db.Comment;
 const Post = db.Post;
 
 exports.AddPost = async(req, res) => {
+    console.log(req.auth.userId)
     const post = await Post.create({
-        UserID: req.auth.UserID,
-        Title: req.body.Title,
+        UserID: req.auth.userId,
         Content: req.body.Content
     })
 }
@@ -28,15 +27,30 @@ exports.Commentary = async(req, res) => {
 }
 
 exports.Profile = async(req, res) => {
-    const userID = req.auth.userID
-    const user = await User.findOne({ id: userID })
+    const userID = req.auth.userId
+    const user = await User.findOne({
+        where: { id: userID }
+    })
+    console.log(user)
     res.status(201).json(user)
 }
 
 exports.DeleteProfile = async(req, res) => {
 
-    const user = await User.drop({
-        userID: req.auth.userID
+    const user = await User.destroy({
+        id: req.auth.userID
     })
 
+}
+
+exports.DeletePost = async(req, res) => {
+    const user = await Post.destroy({
+        UserId: req.auth.userID
+    })
+}
+
+exports.DeleteComment = async(req, res) => {
+    const user = await Comment.destroy({
+        UserId: req.auth.userID
+    })
 }

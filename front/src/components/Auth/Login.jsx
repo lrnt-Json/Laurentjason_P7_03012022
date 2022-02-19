@@ -7,16 +7,15 @@ import Button from '@mui/material/ToggleButton';
 import Paper from '@mui/material/Paper';
 
 import * as React from 'react';
+import { useNavigate } from "react-router-dom";
 
 const axios = require('axios').default;
 
-var validator = require('validator');
-var url =''
 
 function Login() {
+  const navigate = useNavigate()
   const [username, setUser] = React.useState("");
   const [password, setPassword] = React.useState("");
-  const [URL, setURL] = React.useState("");
   const submit = () => {
 
   axios({
@@ -24,12 +23,14 @@ function Login() {
       url: 'http://localhost:4000/api/auth/login',
       data: {
         Username: username,
-        password: password
+        password: password,
       }
     })
     .then(function (response) {
-      url = '/home/' + response.data['token']
-      setURL(url)
+      const d = new Date()
+      d.setTime(d.getTime() + (24*60*60*1000))
+      document.cookie = "token=" +response.data['token'] + ";expires="+ d.toUTCString() + "; path=/";
+      navigate('/home')
   })
 
 }
@@ -50,7 +51,7 @@ function Login() {
                       startAdornment: (<InputAdornment position="start"><LockIcon /></InputAdornment>),
                     }}variant="standard"/>
 
-                  <Button value="Confirm" href={URL} sx={{margin:'10px'}} onClick={submit} >Login</Button>
+                  <Button value="Confirm" sx={{margin:'10px'}} onClick={submit} >Login</Button>
                 </Paper>
               </div>
           )

@@ -2,8 +2,6 @@ const db = require("../models");
 const User = db.User;
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
-const axios = require('axios').default;
-
 
 exports.createUser = async(req, res) => {
 
@@ -27,8 +25,7 @@ exports.logUser = async(req, res) => {
     const user = await User.findOne({
         where: { username: username }
     })
-    console.log(user.password)
-    console.log(password)
+    console.log(user)
     bcrypt.compare(password, user.password)
         .then(valid => {
 
@@ -36,9 +33,9 @@ exports.logUser = async(req, res) => {
                 return res.status(401).send({ error: 'invalid password' }) //api error 401 : Unauthorized
             } else {
                 res.status(200).json({
-                    userId: user._id,
-                    token: jwt.sign({ userId: user._id },
-                        'RANDOM_TOKEN_SECRET', { expiresIn: '24h' })
+                    userId: user.id,
+                    token: jwt.sign({ userId: user.id },
+                        'RANDOM_TOKEN_SECRET', { expiresIn: '1h' })
                 })
             }
         })
