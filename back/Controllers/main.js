@@ -4,9 +4,10 @@ const Comment = db.Comment;
 const Post = db.Post;
 
 exports.AddPost = async(req, res) => {
-    console.log(req.auth.userId)
+    const user = await User.findOne({ where: { id: req.auth.userId } })
     const post = await Post.create({
         UserID: req.auth.userId,
+        Username: user.username,
         Content: req.body.Content
     })
 }

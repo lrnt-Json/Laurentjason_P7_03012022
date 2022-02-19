@@ -2,6 +2,14 @@
     text-align: center;
 }
 
+a {
+    text-decoration: none;
+}
+
+.AllPost {
+    margin: 30px
+}
+
 img {
     max-height: 100px;
 }

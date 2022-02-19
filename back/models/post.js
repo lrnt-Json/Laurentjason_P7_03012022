@@ -1,5 +1,9 @@
 module.exports = (sequelize, Sequelize) => {
     const Post = sequelize.define("Post", {
+        Username: {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
         UserID: {
             type: Sequelize.INTEGER,
             allowNull: false
