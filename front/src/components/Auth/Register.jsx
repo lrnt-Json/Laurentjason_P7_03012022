@@ -23,9 +23,8 @@ function Main() {
     const [username, setUser] = React.useState("");
     const navigate = useNavigate()
 
-    const submit = () => {
+    const Submit = () => {
         validator.isEmail(mail)
-
         axios({
             method: 'post',
             url: 'http://localhost:4000/api/auth/signup',
@@ -33,10 +32,8 @@ function Main() {
               Mail: mail,
               Username: username,
               password: values.password,
-            }
-          }).then (function() {
-            navigate('/auth/login')
-          })
+            }})
+        navigate('/auth/login')
     }
 
     const [values, setValues] = React.useState({
@@ -98,7 +95,7 @@ function Main() {
           />
         </FormControl>
 
-                <Button sx={{ margin: '10px 0 20px 0' }} href="/auth/login" value="Confirm" id="register" onClick={submit}>Confirm</Button>
+                <Button sx={{ margin: '10px 0 20px 0' }} value="Confirm" id="register" onClick={Submit}>Confirm</Button>
             </Paper>
         </div>
     )

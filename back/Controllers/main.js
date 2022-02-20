@@ -54,14 +54,23 @@ exports.DeleteProfil = async(req, res) => {
     const delcomment = Comment.destroy({
         where: { UserID: req.auth.userId }
     })
-
-    const delpost = Post.destroy({
+    const findpost = await Post.findAll({
         where: { UserID: req.auth.userId }
     })
-    const user = await User.destroy({
-        where: { id: req.auth.userId },
-        limit: 1
-    })
+    res.status(201).json(findpost)
+    for (let i = 0; i < findpost.length; i++) {
+        const delpostcomment = Comment.destroy({
+            where: { PostID: findpost[i].id }
+        })
+        const delpost = Post.destroy({
+            where: { id: findpost[i].id }
+        })
+    }
+    /*
+        const user = await User.destroy({
+            where: { id: req.auth.userId },
+            limit: 1
+        })*/
 }
 
 exports.DeletePost = async(req, res) => {
