@@ -1,5 +1,9 @@
 module.exports = (sequelize, Sequelize) => {
     const Comment = sequelize.define("Comment", {
+        Username: {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
         UserID: {
             type: Sequelize.STRING,
             allowNull: false
@@ -8,7 +12,7 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING,
             allowNull: false
         },
-        content: {
+        Content: {
             type: Sequelize.STRING,
             allowNull: false
         }

@@ -38,7 +38,7 @@ function Login() {
 
           return (
               <div className='Home-Form'>
-                <Paper sx={{margin:'20px'}} elevation={3} className='Home-Paper'>
+                <Paper sx={{margin:'20px'}} elevation={3} className='Form-Paper'>
                 <h2 className='Home-Form-Title'>Login</h2>
 
                   <TextField sx={{margin:'10px'}} className='Home-Form-Data' id="input-with-icon-textfield" label="Username" onChange={(e) => setUser(e.target.value)}

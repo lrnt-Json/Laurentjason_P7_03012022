@@ -16,7 +16,7 @@ const [user, setUser] = React.useState("");
 const [mail, setMail] = React.useState("");
 axios({
    methode : 'get',
-   url : 'http://localhost:4000/api/profile',
+   url : 'http://localhost:4000/api/profil',
    headers: {
       'Authorization': `Basic ${token}`
       }})
@@ -27,11 +27,10 @@ axios({
    return (
       <div className='Home-Form'>
          <Paper sx={{margin:'20px'}} elevation={3} className='Home-Paper'>
-            <h2 className='Home-Form-Title'>Profile</h2>
+            <h2 className='Home-Form-Title'>Profil</h2>
             <p>Nom d'utilisateur : {user}</p>
-            <p>Mail : {mail}</p>
-      </Paper>
-
+            <p>Email : {mail}</p>
+         </Paper>
    </div>
 )}
 

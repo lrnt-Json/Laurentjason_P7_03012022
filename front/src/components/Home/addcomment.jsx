@@ -12,11 +12,13 @@ let PostId = document.location.href.split('?')[1]
 
 function Main() {
     const [content, setContent] = React.useState("");
+
     const submit = () => {
         axios({
             method : 'post',
-            url : 'http://localhost:4000/api/post',
+            url : 'http://localhost:4000/api/post/addcomment',
             data: {
+                PostID: PostId,
                 Content: content
               },
             headers: {
@@ -28,14 +30,14 @@ function Main() {
 
     return (
         <div className='Home-Post'>
-            <Button sx={{marginTop: '20px'}} value="return" href='/home'>tout les posts</Button>
-            <Paper elevation={3} className='Form-Paper'>
-                <h2 className='Home-Form-Title'>Nouveau post</h2>
+            <Button value="return" sx={{marginTop: '20px'}} href={'/home/post?'+PostId}>Retour au post</Button>
+            <Paper sx={{ margin: '30px' }} elevation={3} className='Form-Paper'>
+                <h2 className='Home-Form-Title'>Nouveau commentaire</h2>
 
-                <TextareaAutosize multiline aria-label="minimum height" rows={3} placeholder="Ecrire ici" style={{ width: 290}}
+                <TextareaAutosize multiline aria-label="minimum height" rows={3} placeholder="Minimum 3 rows" style={{ width: 290}}
                 onChange={(e) => setContent(e.target.value)} />
 
-                <Button sx={{ margin: '10px 0 20px 0' }} href={"/home"} value="Confirm" id="confirm" onClick={submit}>Confirm</Button>
+                <Button sx={{ margin: '10px 0 20px 0' }} value="Confirm" id="confirm" href={'/home/post?'+PostId} onClick={submit}>Confirmer</Button>
             </Paper>
         </div>
     )

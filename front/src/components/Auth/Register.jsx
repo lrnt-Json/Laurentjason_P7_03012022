@@ -18,8 +18,6 @@ const axios = require('axios').default;
 
 var validator = require('validator');
 
-var url =''
-
 function Main() {
     const [mail, setMail] = React.useState("");
     const [username, setUser] = React.useState("");
@@ -65,7 +63,7 @@ function Main() {
 
     return (
         <div className='Home-Form'>
-            <Paper sx={{ margin: '30px' }} elevation={3} className='Home-Paper'>
+            <Paper sx={{ margin: '30px' }} elevation={3} className='Form-Paper'>
                 <h2 className='Home-Form-Title'>Register</h2>
 
                 <TextField sx={{ margin: '10px' }} className='Home-Form-Data' label="Mail" value={mail} onChange={(e) => setMail(e.target.value)}
@@ -100,7 +98,7 @@ function Main() {
           />
         </FormControl>
 
-                <Button sx={{ margin: '10px 0 20px 0' }} value="Confirm" id="register" onClick={submit}>Confirm</Button>
+                <Button sx={{ margin: '10px 0 20px 0' }} href="/auth/login" value="Confirm" id="register" onClick={submit}>Confirm</Button>
             </Paper>
         </div>
     )

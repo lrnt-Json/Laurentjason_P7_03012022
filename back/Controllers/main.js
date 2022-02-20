@@ -12,36 +12,56 @@ exports.AddPost = async(req, res) => {
     })
 }
 
+exports.AddComment = async(req, res) => {
+    const user = await User.findOne({ where: { id: req.auth.userId } })
+    const post = await Comment.create({
+        UserID: req.auth.userId,
+        PostID: req.body.PostID,
+        Username: user.username,
+        Content: req.body.Content
+    })
+}
+
 exports.AllPost = async(req, res) => {
     const post = await Post.findAll()
     res.status(201).json(post)
 }
 
 exports.OnePost = async(req, res) => {
-    const post = await Post.findOne({ PostID: req.body.postID })
+    const post = await Post.findOne({ where: { id: req.body.PostID } })
     res.status(201).json(post)
 }
 
-exports.Commentary = async(req, res) => {
-    const Comment = await Comment.findAll({ PostID: req.body.postID })
-    res.status(201).json(Comment)
+exports.AllComment = async(req, res) => {
+    const comment = await Comment.findAll({
+        where: { PostID: req.body.PostID },
+        limit: 10
+    })
+    console.log(comment)
+    res.status(201).json(comment)
 }
 
-exports.Profile = async(req, res) => {
+exports.Profil = async(req, res) => {
     const userID = req.auth.userId
     const user = await User.findOne({
         where: { id: userID }
     })
-    console.log(user)
     res.status(201).json(user)
 }
 
-exports.DeleteProfile = async(req, res) => {
+exports.DeleteProfil = async(req, res) => {
 
-    const user = await User.destroy({
-        id: req.auth.userID
+    const delcomment = Comment.destroy({
+        where: { UserID: req.auth.userId }
     })
 
+    const delpost = Post.destroy({
+        where: { UserID: req.auth.userId }
+    })
+    const user = await User.destroy({
+        where: { id: req.auth.userId },
+        limit: 1
+    })
 }
 
 exports.DeletePost = async(req, res) => {

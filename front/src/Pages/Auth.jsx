@@ -3,19 +3,21 @@ import '../styles/Home.css';
 import Button from '@mui/material/ToggleButton';
 import ButtonGroup from '@mui/material/ToggleButtonGroup';
 
-import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Navigate} from "react-router-dom";
 
 import Login from '../components/Auth/Login'
 import Register from '../components/Auth/Register'
 
+import { useNavigate } from "react-router-dom";
 
 function Auth() {
+
   return (
     <div className="Home">
-      <header className="Home-header"><img src='/icon_white.png' alt='logo groupomania'/>
-      <ButtonGroup exclusive>
-          <Button value="Register" href='/auth/register'>Register</Button>
-          <Button value="Login" href='/auth/login'>Login</Button>
+      <header className="Home-header"><img src='/icon.svg' alt='logo groupomania'/>
+      <ButtonGroup sx={{margin: '20px'}} exclusive>
+          <Button sx={{color: 'white'}} value="Register" href='/auth/register'>Register</Button>
+          <Button sx={{color: 'white'}} value="Login" href='/auth/login'>Login</Button>
         </ButtonGroup>
       </header>
       <section>

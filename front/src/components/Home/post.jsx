@@ -11,7 +11,7 @@ const [Content, setContent] = React.useState("");
 const [bodyContent, setBody] = React.useState("Aucun Post");
 
 axios({
-   methode : 'get',
+   method : 'get',
    url : 'http://localhost:4000/api/post',
    headers: {
       'Authorization': `Basic ${token}`
@@ -20,10 +20,8 @@ axios({
       if (update !== 2){
          update = update +1
          setContent(response.data)
-         console.log(response.data)
       }
       if (Content !== "" & updateBody === false){
-         console.log(Content)
          updateBody = true
          body()
       }
@@ -32,9 +30,8 @@ axios({
 function body() {
    let persons = []
    for (let i = 0; i<Content.length; i++){
-      console.log(Content[i].Username)
       persons.push(
-         <a href={'/home/:id='+ Content[i].id} ><Paper sx={{width:'300px'}} elevation={3} className='Home-Paper'>
+         <a href={'/home/post?'+ Content[i].id} ><Paper elevation={3} className='Home-Paper'>
          <h2 className='Home-Form-Title'>{Content[i].Username}</h2>
          <p>{Content[i].Content}</p>
          </Paper></a>
@@ -44,7 +41,7 @@ function body() {
 
 return (
    <div className='Home-Post'>
-      <Button value="addPost" href='/home/addpost'>add post</Button>
+      <Button sx={{marginTop: '20px'}} value="addPost" href='/home/addpost'>add post</Button>
       <div className='AllPost'>{bodyContent}</div>
    </div>)
 }

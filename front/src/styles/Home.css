@@ -6,12 +6,21 @@ a {
     text-decoration: none;
 }
 
-.AllPost {
-    margin: 30px
+h2 {
+    margin: 20px;
+    font-size: 1.2em;
+}
+
+p {
+    margin: 20px;
+    margin-top: 0px;
+    font-size: 1em;
 }
 
 img {
-    max-height: 100px;
+    height: 50px;
+    width: 200px;
+    margin: 10px;
 }
 
 .Home-header {
@@ -25,6 +34,7 @@ img {
 }
 
 .Home-Form {
+    margin: 30px;
     display: flex;
     justify-content: center;
 }
@@ -35,12 +45,57 @@ img {
     align-items: center;
 }
 
+.Header-Button {
+    color: white;
+}
+
 .Home-Paper {
+    width: 360px;
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.Form-Paper {
+    width: 360px;
+    margin: 20px 0;
     display: flex;
     flex-direction: column;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .Home-Form-Data {
     margin: 10px;
+}
+
+.One-Post {
+    width: 370px;
+    margin: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+@media screen and (max-width: 1024px) {
+    /*Start of Tablet part*/
+    .Home-header {
+        flex-direction: column;
+    }
+    .Home-Paper {
+        width: 300px;
+    }
+    .Form-Paper {
+        width: 300px;
+    }
+    .Form-textfield {
+        width: 275px;
+    }
+    .One-Post {
+        width: 300px;
+        margin: 20px;
+    }
 }

@@ -9,6 +9,7 @@ import { BrowserRouter as useNavigate, Route, Routes} from "react-router-dom";
 import Post from '../components/Home/post'
 import OnePost from '../components/Home/onepost'
 import AddPost from '../components/Home/addpost'
+import AddComment from '../components/Home/addcomment'
 
 const Logout = () => {
   document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
@@ -17,17 +18,18 @@ const Logout = () => {
 function Auth() {
   return (
     <div className="Home">
-      <header className="Home-header"><img src='/icon_white.png' alt='logo groupomania'/>
-      <ButtonGroup exclusive>
-          <Button value="profil" href={'/user'}>Profil</Button>
-          <Button value="logout" href={'/'} onClick={Logout}>Se déconnecter</Button>
+      <header className="Home-header"><img src='/icon.svg' alt='logo groupomania'/>
+        <ButtonGroup sx={{margin: '20px'}} exclusive>
+          <Button sx={{color: 'white'}} value="profil" href={'/user'}>Profil</Button>
+          <Button sx={{color: 'white'}} value="logout" href={'/'} onClick={Logout}>Se déconnecter</Button>
         </ButtonGroup>
       </header>
       <section>
         <Routes>
           <Route path="/" element={<Post />}/>
-          <Route path="/post" element={<OnePost />}/>
+          <Route path="/post/*" element={<OnePost />}/>
           <Route path="/addpost" element={<AddPost />}/>
+          <Route path="/post/comment" element={<AddComment />}/>
         </Routes>
       </section>
     </div>
