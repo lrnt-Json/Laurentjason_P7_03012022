@@ -9,6 +9,10 @@ exports.AddPost = async(req, res) => {
         UserID: req.auth.userId,
         Username: user.username,
         Content: req.body.Content
+    }).then(function(response) {
+        res.status(200).send({ msg: "post send" })
+    }).catch(function(error) {
+        res.status(401).send({ error: "post not send" })
     })
 }
 
@@ -19,6 +23,10 @@ exports.AddComment = async(req, res) => {
         PostID: req.body.PostID,
         Username: user.username,
         Content: req.body.Content
+    }).then(function(response) {
+        res.status(200).send({ msg: "comment send" })
+    }).catch(function(error) {
+        res.status(401).send({ error: "comment not send" })
     })
 }
 

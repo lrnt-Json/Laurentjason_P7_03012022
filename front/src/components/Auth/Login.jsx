@@ -13,12 +13,18 @@ import { useNavigate } from "react-router-dom";
 
 const axios = require('axios').default;
 
+var validator = require('validator');
 
 function Login() {
   const navigate = useNavigate()
   const [username, setUser] = React.useState("");
+  const [error, setError] = React.useState("");
   const submit = () => {
-  console.log(values.password)
+  if (validator.isEmpty(username) === true){
+    setError("Le nom d'utilisateur est vide")
+  }else if (validator.isEmpty(values.password) === true){
+    setError("Le mot de passe est vide")
+  }else{
   axios({
       method: 'post',
       url: 'http://localhost:4000/api/auth/login',
@@ -32,7 +38,10 @@ function Login() {
       d.setTime(d.getTime() + (24*60*60*1000))
       document.cookie = "token=" +response.data['token'] + ";expires="+ d.toUTCString() + "; path=/";
       navigate('/home')
-  })
+  }).catch(function (error) {
+      console.error(error)
+      setError("Donnée incorrect, vérifier que les informations entrée soit valide.")
+  })}
 
 }
 const [values, setValues] = React.useState({
@@ -65,6 +74,7 @@ const [values, setValues] = React.useState({
                     />
                   </FormControl>
                   <Button value="Confirm" sx={{margin:'10px'}} onClick={submit} >Login</Button>
+                  <p className='error'>{error}</p>
                 </Paper>
               </div>
           )

@@ -5,7 +5,7 @@ import ButtonGroup from '@mui/material/ToggleButtonGroup';
 
 import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
 
-import Post from '../components/Profil/profil'
+import Profil from '../components/Profil/profil'
 import axios from 'axios';
 
 let token = decodeURIComponent(document.cookie)
@@ -35,7 +35,7 @@ function user() {
       </header>
       <section>
         <Routes>
-          <Route path="/" element={<Post />}/>
+          <Route path="/" element={<Profil />}/>
         </Routes>
         <Button sx={{ margin: '10px 0 20px 0' }} value="Confirm" href="/" id="confirm" onClick={submit} >Supprimer le compte</Button>
       </section>

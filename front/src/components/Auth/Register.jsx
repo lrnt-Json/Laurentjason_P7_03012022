@@ -21,10 +21,18 @@ var validator = require('validator');
 function Main() {
     const [mail, setMail] = React.useState("");
     const [username, setUser] = React.useState("");
+    const [error, setError] = React.useState("");
     const navigate = useNavigate()
 
     const Submit = () => {
-        validator.isEmail(mail)
+        if (validator.isEmail(mail) === false){
+          setError("L'émail n'est pas valide")
+        }else if (validator.isEmpty(username) === true){
+          setError("Le nom d'utilisateur est vide")
+        }else if (validator.isEmpty(values.password) === true){
+          setError("Le mot de passe est vide")
+        }else{
+        setError("")
         axios({
             method: 'post',
             url: 'http://localhost:4000/api/auth/signup',
@@ -33,8 +41,12 @@ function Main() {
               Username: username,
               password: values.password,
             }})
-        navigate('/auth/login')
-    }
+            .then(function(response){navigate('/auth/login')})
+            .catch(function (error) {
+              console.error(error)
+              setError("L'émail ou le nom d'utilisateur sont déja enregistrer")
+          })}}
+
 
     const [values, setValues] = React.useState({
         username: '',
@@ -96,6 +108,7 @@ function Main() {
         </FormControl>
 
                 <Button sx={{ margin: '10px 0 20px 0' }} value="Confirm" id="register" onClick={Submit}>Confirm</Button>
+                <p className='error'>{error}</p>
             </Paper>
         </div>
     )
