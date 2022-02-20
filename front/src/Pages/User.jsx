@@ -21,9 +21,7 @@ const submit = () => {
     url : 'http://localhost:4000/api/profil',
     headers: {
      'Authorization': `Basic ${token}`
-   }}).then(function (res){
-    console.log(res)
-  })
+   }})
   }
 
 function user() {
@@ -39,7 +37,7 @@ function user() {
         <Routes>
           <Route path="/" element={<Post />}/>
         </Routes>
-        <Button sx={{ margin: '10px 0 20px 0' }} value="Confirm" id="confirm" onClick={submit} >Supprimer le compte</Button>
+        <Button sx={{ margin: '10px 0 20px 0' }} value="Confirm" href="/" id="confirm" onClick={submit} >Supprimer le compte</Button>
       </section>
     </div>
   );
