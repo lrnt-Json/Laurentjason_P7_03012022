@@ -4,6 +4,7 @@ import Paper from '@mui/material/Paper';
 
 import * as React from 'react';
 import { useNavigate } from "react-router-dom";
+import user from '../../Pages/User';
 
 const axios = require('axios').default;
 
@@ -52,7 +53,7 @@ function Main() {
                 <TextareaAutosize multiline aria-label="minimum height" rows={3} placeholder="Ecrire ici" style={{ width: 290}}
                 onChange={(e) => setContent(e.target.value)} />
 
-                <Button sx={{ margin: '10px 0 20px 0' }} value="Confirm" id="confirm" onClick={submit}>Confirm</Button>
+                <Button sx={{ margin: '10px 0 20px 0' }} value="Confirm" id="confirm" onClick={submit}>Confirmer</Button>
                 <p className='error'>{error}</p>
             </Paper>
         </div>

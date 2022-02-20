@@ -9,7 +9,7 @@ import { BrowserRouter as useNavigate, Route, Routes} from "react-router-dom";
 import Post from '../components/Home/post'
 import OnePost from '../components/Home/onepost'
 import AddPost from '../components/Home/addpost'
-import AddComment from '../components/Home/addcomment'
+import AddFeedback from '../components/Home/addfeedback'
 
 const Logout = () => {
   document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
@@ -29,7 +29,7 @@ function Auth() {
           <Route path="/" element={<Post />}/>
           <Route path="/post/*" element={<OnePost />}/>
           <Route path="/addpost" element={<AddPost />}/>
-          <Route path="/post/comment" element={<AddComment />}/>
+          <Route path="/post/feedback" element={<AddFeedback />}/>
         </Routes>
       </section>
     </div>

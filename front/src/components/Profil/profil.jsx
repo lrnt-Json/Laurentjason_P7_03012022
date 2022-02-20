@@ -31,7 +31,7 @@ axios({
             <p>Nom d'utilisateur : {user}</p>
             <p>Email : {mail}</p>
          </Paper>
-   </div>
+      </div>
 )}
 
 export default Profile;

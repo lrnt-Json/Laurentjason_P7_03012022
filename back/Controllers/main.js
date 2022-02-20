@@ -1,7 +1,17 @@
 const db = require("../models");
 const User = db.User;
-const Comment = db.Comment;
+const Feedback = db.Feedback;
 const Post = db.Post;
+
+
+exports.IsAdmin = async(req, res) => {
+    const userID = req.auth.userId
+    const user = await User.findOne({
+        where: { id: userID }
+    }).then(function(response) {
+        res.status(201).json(response.isAdmin)
+    })
+}
 
 exports.AddPost = async(req, res) => {
     const user = await User.findOne({ where: { id: req.auth.userId } })
@@ -16,17 +26,17 @@ exports.AddPost = async(req, res) => {
     })
 }
 
-exports.AddComment = async(req, res) => {
+exports.AddFeedback = async(req, res) => {
     const user = await User.findOne({ where: { id: req.auth.userId } })
-    const post = await Comment.create({
+    const post = await Feedback.create({
         UserID: req.auth.userId,
         PostID: req.body.PostID,
         Username: user.username,
         Content: req.body.Content
     }).then(function(response) {
-        res.status(200).send({ msg: "comment send" })
+        res.status(200).send({ msg: "feedback send" })
     }).catch(function(error) {
-        res.status(401).send({ error: "comment not send" })
+        res.status(401).send({ error: "feedback not send" })
     })
 }
 
@@ -40,13 +50,13 @@ exports.OnePost = async(req, res) => {
     res.status(201).json(post)
 }
 
-exports.AllComment = async(req, res) => {
-    const comment = await Comment.findAll({
+exports.AllFeedback = async(req, res) => {
+    const feedback = await Feedback.findAll({
         where: { PostID: req.body.PostID },
         limit: 10
     })
-    console.log(comment)
-    res.status(201).json(comment)
+    console.log(feedback)
+    res.status(201).json(feedback)
 }
 
 exports.Profil = async(req, res) => {
@@ -59,14 +69,14 @@ exports.Profil = async(req, res) => {
 
 exports.DeleteProfil = async(req, res) => {
 
-    const delcomment = Comment.destroy({
+    const delfeedback = Feedback.destroy({
         where: { UserID: req.auth.userId }
     })
     const findpost = await Post.findAll({
         where: { UserID: req.auth.userId }
     })
     for (let i = 0; i < findpost.length; i++) {
-        const delpostcomment = Comment.destroy({
+        const delpostfeedback = Feedback.destroy({
             where: { PostID: findpost[i].id }
         })
         const delpost = Post.destroy({
@@ -81,13 +91,24 @@ exports.DeleteProfil = async(req, res) => {
 }
 
 exports.DeletePost = async(req, res) => {
-    const user = await Post.destroy({
-        UserId: req.auth.userID
+    const delpostfeedback = Feedback.destroy({
+        where: { PostId: req.body.PostId }
+    })
+    const delpost = Post.destroy({
+        where: { id: req.body.PostId }
     })
 }
 
-exports.DeleteComment = async(req, res) => {
-    const user = await Comment.destroy({
-        UserId: req.auth.userID
-    })
+exports.DeleteFeedback = async(req, res) => {
+    console.log("delete id")
+    console.log(req.body.PostId)
+    const user = await Feedback.destroy({
+            where: { PostId: req.body.PostId }
+        })
+        .then(function(response) {
+            res.status(200).send({ msg: "Feedback deleted" })
+        })
+        .catch(function(error) {
+            res.status(401).send({ error: "Feedback not deleted" })
+        })
 }

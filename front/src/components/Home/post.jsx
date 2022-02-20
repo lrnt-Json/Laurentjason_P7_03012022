@@ -31,17 +31,19 @@ function body() {
    let persons = []
    for (let i = 0; i<Content.length; i++){
       persons.push(
-         <a href={'/home/post?'+ Content[i].id} ><Paper elevation={3} className='Home-Paper'>
-         <h2 className='Home-Form-Title'>{Content[i].Username}</h2>
-         <p>{Content[i].Content}</p>
-         </Paper></a>
+         <a href={'/home/post?'+ Content[i].id} >
+            <Paper elevation={3} className='Home-Paper'>
+               <h2 className='Home-Form-Title'>{Content[i].Username}</h2>
+               <p className='text'>{Content[i].Content}</p>
+            </Paper>
+         </a>
       )
    }
    setBody(persons)}
 
 return (
    <div className='Home-Post'>
-      <Button sx={{marginTop: '20px'}} value="addPost" href='/home/addpost'>add post</Button>
+      <Button sx={{marginTop: '20px'}} value="addPost" href='/home/addpost'>Ajouter un post</Button>
       <div className='AllPost'>{bodyContent}</div>
    </div>)
 }

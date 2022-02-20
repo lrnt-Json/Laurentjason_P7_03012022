@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-    const Comment = sequelize.define("Comment", {
+    const Feedback = sequelize.define("Feedback", {
         Username: {
             type: Sequelize.STRING,
             allowNull: false
@@ -17,5 +17,5 @@ module.exports = (sequelize, Sequelize) => {
             allowNull: false
         }
     });
-    return Comment;
+    return Feedback;
 }

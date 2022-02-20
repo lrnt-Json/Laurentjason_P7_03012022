@@ -27,7 +27,7 @@ function Main() {
         else{
             axios({
                 method : 'post',
-                url : 'http://localhost:4000/api/post/addcomment',
+                url : 'http://localhost:4000/api/post/addfeedback',
                 data: {
                     PostID: PostId,
                     Content: content
