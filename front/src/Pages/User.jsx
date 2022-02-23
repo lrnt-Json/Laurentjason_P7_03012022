@@ -8,6 +8,8 @@ import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import Profil from '../components/Profil/profil'
 import axios from 'axios';
 
+function user() {
+
 let token = decodeURIComponent(document.cookie)
 
 const Logout = () => {
@@ -24,7 +26,6 @@ const submit = () => {
    }})
   }
 
-function user() {
   return (
     <div className="Home">
       <header className="Home-header"><img src='/icon.svg' alt='logo groupomania'/>

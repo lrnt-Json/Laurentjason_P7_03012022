@@ -47,7 +47,7 @@ function Main() {
 
     return (
         <div className='Home-Post'>
-            <Button value="return" sx={{marginTop: '20px'}} href={'/home/post?'+PostId}>Retour au post</Button>
+            <Button value="return" sx={{marginTop: '20px'}} onClick={() => {navigate('/home/post?'+PostId)}} >Retour au post</Button>
             <Paper sx={{ margin: '30px' }} elevation={3} className='Form-Paper'>
                 <h2 className='Home-Form-Title'>Nouveau commentaire</h2>
 

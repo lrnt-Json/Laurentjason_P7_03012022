@@ -11,11 +11,12 @@ import OnePost from '../components/Home/onepost'
 import AddPost from '../components/Home/addpost'
 import AddFeedback from '../components/Home/addfeedback'
 
+function Auth() {
+
 const Logout = () => {
   document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 }
 
-function Auth() {
   return (
     <div className="Home">
       <header className="Home-header"><img src='/icon.svg' alt='logo groupomania'/>

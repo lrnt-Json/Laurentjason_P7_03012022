@@ -2,10 +2,13 @@ const express = require('express');
 const bodyParser = require('body-parser')
 const controller = require('../controllers/main');
 const auth = require('../middleware/auth');
+const multer = require('../middleware/multer-config')
+
 const router = express();
+
 router.use(bodyParser.json())
 
-router.post('/post', auth, controller.AddPost)
+router.post('/post', auth, multer, controller.AddPost)
 router.post('/post/addfeedback', auth, controller.AddFeedback)
 router.post('/post/feedback', auth, controller.OnePost)
 router.post('/post/allfeedback', auth, controller.AllFeedback)

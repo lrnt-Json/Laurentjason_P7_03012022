@@ -24,18 +24,10 @@ app.use((req, res, next) => {
 app.use(helmet())
 
 //express-session for cookies vulnerability
-/*
+
 app.set('trust proxy', 1) // trust first proxy
-app.use(session({
-    genid: function(req) {
-        return genuuid() // use UUIDs for session IDs
-    },
-    secret: 'MuFf1N',
-    cookie: { maxAge: 60000 },
-    resave: false,
-    saveUninitialized: false
-}));
-*/
+app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 } }))
+
 
 app.use('/api/auth', authRoutes)
 app.use('/api', PostRoutes)

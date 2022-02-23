@@ -2,14 +2,14 @@ import Paper from '@mui/material/Paper';
 import Button from '@mui/material/ToggleButton';
 
 import * as React from 'react';
-let update = 0
-let updateBody = false
+import { useNavigate } from 'react-router-dom';
+
 const axios = require('axios').default;
 let token = decodeURIComponent(document.cookie)
 function Post(){
-const [Content, setContent] = React.useState("");
-const [bodyContent, setBody] = React.useState("Aucun Post");
-
+const [Content, setContent] = React.useState([]);
+const navigate = useNavigate()
+React.useEffect (()=>{
 axios({
    method : 'get',
    url : 'http://localhost:4000/api/post',
@@ -17,34 +17,24 @@ axios({
       'Authorization': `Basic ${token}`
     }})
       .then (function(response){
-      if (update !== 2){
-         update = update +1
          setContent(response.data)
       }
-      if (Content !== "" & updateBody === false){
-         updateBody = true
-         body()
-      }
-})
-
-function body() {
-   let persons = []
-   for (let i = 0; i<Content.length; i++){
-      persons.push(
-         <a href={'/home/post?'+ Content[i].id} >
-            <Paper elevation={3} className='Home-Paper'>
-               <h2 className='Home-Form-Title'>{Content[i].Username}</h2>
-               <p className='text'>{Content[i].Content}</p>
-            </Paper>
-         </a>
-      )
-   }
-   setBody(persons)}
+)},[])
 
 return (
    <div className='Home-Post'>
-      <Button sx={{marginTop: '20px'}} value="addPost" href='/home/addpost'>Ajouter un post</Button>
-      <div className='AllPost'>{bodyContent}</div>
+      <Button sx={{marginTop: '20px'}} value="addPost" onClick={() => {navigate('/home/addpost')}}>Ajouter un post</Button>
+      <div className='AllPost'>
+         {Content.map((content) => (
+         <a href={'/home/post?'+ content.id} key={content.id}>
+            <Paper elevation={3} className='Home-Paper'>
+               <img src={content.imgUrl}></img>
+               <h2 className='Home-Form-Title'>{content.Username}</h2>
+               <p className='text'>{content.Content}</p>
+            </Paper>
+         </a>
+         ))}
+      </div>
    </div>)
 }
 export default Post;

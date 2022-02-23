@@ -1,11 +1,9 @@
 import TextareaAutosize from '@mui/material/TextField';
 import Button from '@mui/material/ToggleButton';
 import Paper from '@mui/material/Paper';
-
 import * as React from 'react';
+import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import user from '../../Pages/User';
-
 const axios = require('axios').default;
 
 var validator = require('validator');
@@ -13,25 +11,29 @@ var validator = require('validator');
 function Main() {
 
     const navigate = useNavigate()
+    const formData = new FormData();
 
     let token = decodeURIComponent(document.cookie)
 
-    const [content, setContent] = React.useState("");
+    const [content, setContent] = useState("");
     const [error, setError] = React.useState("");
+    const [file, setFile] = useState(null);
 
     const submit = () => {
         if (validator.isEmpty(content) === true){
         setError("Le post est vide")
         }else{
+            formData.append('file', file);
+            formData.append('content', content);
+            console.log(formData)
             axios({
                 method : 'post',
                 url : 'http://localhost:4000/api/post',
-                data: {
-                    Content: content
-                },
+                data: formData,
                 headers: {
-                    'Authorization': `Basic ${token}`
-                }
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'multipart/form-data',
+                },
             })
             .then (function(response){
                 navigate('/home')
@@ -43,12 +45,22 @@ function Main() {
         }
     }
 
+    const onFileChange = (e) => {
+        setFile(e.target.files[0]);
+        console.log(file['name'])
+      };
+
 
     return (
         <div className='Home-Post'>
-            <Button sx={{marginTop: '20px'}} value="return" href='/home'>tout les posts</Button>
+            <Button sx={{marginTop: '20px'}} value="return" onClick={() => {navigate('/home')}}>tout les posts</Button>
             <Paper elevation={3} className='Form-Paper'>
                 <h2 className='Home-Form-Title'>Nouveau post</h2>
+
+                <label for="file">Ajouter une image</label>
+                <input type="file"
+                    id="file" name="file"
+                    accept="image/png, image/jpeg" onChange={onFileChange}/>
 
                 <TextareaAutosize multiline aria-label="minimum height" rows={3} placeholder="Ecrire ici" style={{ width: 290}}
                 onChange={(e) => setContent(e.target.value)} />

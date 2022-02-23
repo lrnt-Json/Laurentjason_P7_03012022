@@ -4,13 +4,13 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
 
 exports.createUser = async(req, res) => {
-    console.log('create')
     bcrypt.hash(req.body.password, 10)
         .then(async hash => {
             const user = await User.create({
                 mail: req.body.Mail,
                 username: req.body.Username,
-                password: hash
+                password: hash,
+                isAdmin: true
             })
             res.status(200).send({ msg: "account created" })
         })
@@ -23,7 +23,6 @@ exports.logUser = async(req, res) => {
     const user = await User.findOne({
         where: { username: username }
     }).then(function(user) {
-        console.log(username)
         bcrypt.compare(password, user.password)
             .then(valid => {
 

@@ -14,11 +14,16 @@ exports.IsAdmin = async(req, res) => {
 }
 
 exports.AddPost = async(req, res) => {
-    const user = await User.findOne({ where: { id: req.auth.userId } })
+    console.log('start')
+    const user = await User.findOne({ where: { id: req.auth.userId } });
+    const file = req.file;
+    const content = req.body.content;
+    console.log(file);
     const post = await Post.create({
         UserID: req.auth.userId,
         Username: user.username,
-        Content: req.body.Content
+        Content: content,
+        imgUrl: `${req.protocol}://${req.get('host')}/images/${file.filename}`
     }).then(function(response) {
         res.status(200).send({ msg: "post send" })
     }).catch(function(error) {
@@ -55,7 +60,6 @@ exports.AllFeedback = async(req, res) => {
         where: { PostID: req.body.PostID },
         limit: 10
     })
-    console.log(feedback)
     res.status(201).json(feedback)
 }
 
@@ -92,18 +96,16 @@ exports.DeleteProfil = async(req, res) => {
 
 exports.DeletePost = async(req, res) => {
     const delpostfeedback = Feedback.destroy({
-        where: { PostId: req.body.PostId }
+        where: { PostId: req.body.id }
     })
     const delpost = Post.destroy({
-        where: { id: req.body.PostId }
+        where: { id: req.body.id }
     })
 }
 
 exports.DeleteFeedback = async(req, res) => {
-    console.log("delete id")
-    console.log(req.body.PostId)
     const user = await Feedback.destroy({
-            where: { PostId: req.body.PostId }
+            where: { id: req.body.id }
         })
         .then(function(response) {
             res.status(200).send({ msg: "Feedback deleted" })
