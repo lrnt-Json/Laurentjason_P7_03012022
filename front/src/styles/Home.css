@@ -23,6 +23,10 @@ p {
 }
 
 img {
+    margin: 10px
+}
+
+.logo {
     height: 50px;
     width: 200px;
     margin: 10px;

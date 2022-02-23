@@ -28,7 +28,7 @@ const submit = () => {
 
   return (
     <div className="Home">
-      <header className="Home-header"><img src='/icon.svg' alt='logo groupomania'/>
+      <header className="Home-header"><img className='logo' src='/icon.svg' alt='logo groupomania'/>
         <ButtonGroup sx={{margin: '20px',color: 'white'}} exclusive>
           <Button sx={{color: 'white'}} value="post" href={'/home'}>Tout les posts</Button>
           <Button sx={{color: 'white'}} value="logout" href={'/'} onClick={Logout}>Se déconnecter</Button>

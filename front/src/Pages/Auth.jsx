@@ -14,7 +14,7 @@ var navigate = useNavigate()
 
   return (
     <div className="Home">
-      <header className="Home-header"><img src='/icon.svg' alt='logo groupomania'/>
+      <header className="Home-header"><img className='logo' src='/icon.svg' alt='logo groupomania'/>
       <ButtonGroup sx={{margin: '20px'}} exclusive>
           <Button sx={{color: 'white'}} value="Register"  onClick={ () => {navigate('/auth/register')}}>Register</Button>
           <Button sx={{color: 'white'}} value="Login" onClick={ () => {navigate('/auth/login')}}>Login</Button>

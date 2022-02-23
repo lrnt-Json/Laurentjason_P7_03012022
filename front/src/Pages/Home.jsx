@@ -19,7 +19,7 @@ const Logout = () => {
 
   return (
     <div className="Home">
-      <header className="Home-header"><img src='/icon.svg' alt='logo groupomania'/>
+      <header className="Home-header"><img className='logo' src='/icon.svg' alt='logo groupomania'/>
         <ButtonGroup sx={{margin: '20px'}} exclusive>
           <Button sx={{color: 'white'}} value="profil" href={'/user'}>Profil</Button>
           <Button sx={{color: 'white'}} value="logout" href={'/'} onClick={Logout}>Se déconnecter</Button>
