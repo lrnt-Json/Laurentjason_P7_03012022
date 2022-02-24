@@ -2,7 +2,7 @@
 
 ## Installation :
 
-Double click sur databaseInit.sql ( créer la base de donnée SQL "groupomania")
+Double click sur databaseInit.sql ( créer la base de donnée SQL "groupomania")  
 puis ouvrez le dossier P7_Jason_laurent_code sur Vs code
 
 __Sur un terminal node :__
