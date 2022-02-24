@@ -1,9 +1,12 @@
 import TextareaAutosize from '@mui/material/TextField';
 import Button from '@mui/material/ToggleButton';
 import Paper from '@mui/material/Paper';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+
 import * as React from 'react';
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
+
 const axios = require('axios').default;
 
 var validator = require('validator');
@@ -47,7 +50,8 @@ function Main() {
 
     const onFileChange = (e) => {
         setFile(e.target.files[0]);
-        console.log(file['name'])
+        document.getElementById('fileName').innerHTML=e.target.files[0].name;//
+        console.log(e.target.files[0].name)
       };
 
 
@@ -57,11 +61,13 @@ function Main() {
             <Paper elevation={3} className='Form-Paper'>
                 <h2 className='Home-Form-Title'>Nouveau post</h2>
 
-                <label for="file">Ajouter une image</label>
-                <input type="file"
-                    id="file" name="file"
-                    accept="image/png, image/jpeg" onChange={onFileChange}/>
-
+                <div className='upload'>
+                    <label for="file" className="upload-input-trigger">Ajouter une image</label>
+                    <input type="file" className='upload-input'
+                        id="file" name="file"
+                        accept="image/png, image/jpeg" onChange={onFileChange}/>
+                    {file !== null && <span><CheckCircleOutlineIcon sx={{color: 'green'}}/></span>}
+                </div><p id='fileName'></p>
                 <TextareaAutosize multiline aria-label="minimum height" rows={3} placeholder="Ecrire ici" style={{ width: 290}}
                 onChange={(e) => setContent(e.target.value)} />
 

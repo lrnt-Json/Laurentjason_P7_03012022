@@ -2,7 +2,7 @@ const db = require("../models");
 const User = db.User;
 const Feedback = db.Feedback;
 const Post = db.Post;
-
+const fs = require('fs')
 
 exports.IsAdmin = async(req, res) => {
     const userID = req.auth.userId
@@ -19,11 +19,14 @@ exports.AddPost = async(req, res) => {
     const file = req.file;
     const content = req.body.content;
     console.log(file);
+    var url = undefined;
+    if (file !== undefined) { url = `${req.protocol}://${req.get('host')}/images/${file.filename}` };
+    console.log(url)
     const post = await Post.create({
         UserID: req.auth.userId,
         Username: user.username,
         Content: content,
-        imgUrl: `${req.protocol}://${req.get('host')}/images/${file.filename}`
+        imgUrl: url
     }).then(function(response) {
         res.status(200).send({ msg: "post send" })
     }).catch(function(error) {
@@ -71,6 +74,7 @@ exports.Profil = async(req, res) => {
     res.status(201).json(user)
 }
 
+fs
 exports.DeleteProfil = async(req, res) => {
 
     const delfeedback = Feedback.destroy({
@@ -80,6 +84,11 @@ exports.DeleteProfil = async(req, res) => {
         where: { UserID: req.auth.userId }
     })
     for (let i = 0; i < findpost.length; i++) {
+        console.log(findpost[i])
+        if (findpost[i].imgUrl !== null) {
+            const filename = findpost[i].imgUrl.split('/images/')[1]
+            fs.unlink(`images/${filename}`, () => {})
+        }
         const delpostfeedback = Feedback.destroy({
             where: { PostID: findpost[i].id }
         })
@@ -98,6 +107,13 @@ exports.DeletePost = async(req, res) => {
     const delpostfeedback = Feedback.destroy({
         where: { PostId: req.body.id }
     })
+    const post = await Post.findOne({ where: { id: req.body.id } })
+    console.log(post)
+    if (post.imgUrl !== null) {
+        const filename = post.imgUrl.split('/images')[1]
+        console.log(filename)
+        fs.unlink(`images/${filename}`, () => {})
+    }
     const delpost = Post.destroy({
         where: { id: req.body.id }
     })

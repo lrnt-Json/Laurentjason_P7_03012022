@@ -14,6 +14,7 @@ function Post(){
 const [admin, setAdmin] = React.useState(false);
 const [Username, setUser] = React.useState("");
 const [Content, setContent] = React.useState([]);
+const [imgUrl, setUrl ] = React.useState("");
 const [Feedback, setFeedback] = React.useState([]);
 const navigate = useNavigate()
 React.useEffect (()=>{
@@ -50,8 +51,10 @@ axios({
    }
    }).then(function (response) {
       const Post = response.data
+      console.log(Post)
       setUser(Post.Username)
       setContent(Post.Content)
+      setUrl(Post.imgUrl)
    })
 },[])
 
@@ -94,6 +97,7 @@ return (
             <h2>{Username}</h2>
             {admin && <Button sx={{margin: '10px' ,color: 'red' }} value="DeletePost" href="/home" onClick={() => deletePost()}>Supprimer</Button>}
          </div>
+         {imgUrl !== null && <div><img src={imgUrl} crossOrigin="anonymous" alt='postimg'></img></div>}
          <p className='text'>{Content}</p>
       </Paper>
       <div className='AllPost'>

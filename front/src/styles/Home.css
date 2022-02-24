@@ -23,13 +23,38 @@ p {
 }
 
 img {
-    margin: 10px
+    margin: 20px;
+    width: 250px;
 }
 
 .logo {
     height: 50px;
     width: 200px;
     margin: 10px;
+}
+
+.upload {
+    display: flex;
+    align-items: center;
+}
+
+.upload-input-trigger {
+    display: flex;
+    align-items: center;
+    margin: 10px;
+    background-color: white;
+    border: lightgray solid 1px;
+    border-radius: 5px;
+    color: gray;
+    padding: 10px;
+}
+
+.upload-input-trigger:hover {
+    background-color: whitesmoke;
+}
+
+.upload-input {
+    display: none;
 }
 
 .Home-header {

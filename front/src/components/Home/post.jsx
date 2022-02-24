@@ -28,8 +28,8 @@ return (
          {Content.map((content) => (
          <a href={'/home/post?'+ content.id} key={content.id}>
             <Paper elevation={3} className='Home-Paper'>
-               <img src={content.imgUrl}></img>
                <h2 className='Home-Form-Title'>{content.Username}</h2>
+               {content.imgUrl !== null && <div><img src={content.imgUrl} crossOrigin="anonymous" alt={'postimage' + content.id}></img></div>}
                <p className='text'>{content.Content}</p>
             </Paper>
          </a>
